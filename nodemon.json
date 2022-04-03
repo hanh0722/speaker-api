@@ -1,0 +1,14 @@
+{
+    "env": {
+        "CLOUDINARY_KEY": "539275864181413",
+        "CLOUDINARY_KEY_SECRET": "FcInIZCmHK02vPQypmTB8Cdww8Y",
+        "CLOUD_NAME": "plenty-react-api",
+        "MONGODB_USERNAME": "admin-3",
+        "MONGODB_PASSWORD": "VNriFz5qjriOEp44",
+        "SENDGRID_API": "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",
+        "TWILIO_SID": "ACd1edbd7e82d4600c389fad31ec346e74",
+        "TWILIO_AUTH_TOKEN": "3a23908fcdc4f0de30c0d86e8c12ae1b",
+        "ADMIN_EMAIL": "AnhNDH.B19CN022@stu.ptit.edu.vn",
+        "TWILIO_NUMBER": "+19046011556"
+    }
+}

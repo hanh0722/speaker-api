@@ -1,0 +1,1 @@
+export const FIELD_FILTER = ['password', 'validate_info'];

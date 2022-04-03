@@ -1,0 +1,1 @@
+export type FileArray = Array<Express.Multer.File>;

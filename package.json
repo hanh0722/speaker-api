@@ -1,0 +1,38 @@
+{
+  "name": "speaker-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon dist/app.js",
+    "build": "tsc",
+    "start": "CLOUDINARY_KEY=539275864181413 CLOUDINARY_KEY_SECRET=FcInIZCmHK02vPQypmTB8Cdww8Y CLOUD_NAME=plenty-react-api MONGODB_USERNAME=admin-3 MONGODB_PASSWORD=VNriFz5qjriOEp44 SENDGRID_API=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 TWILIO_SID=ACd1edbd7e82d4600c389fad31ec346e74 TWILIO_AUTH_TOKEN=3a23908fcdc4f0de30c0d86e8c12ae1b ADMIN_EMAIL=AnhNDH.B19CN022@stu.ptit.edu.vn TWILIO_NUMBER=+19046011556 node dist/app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@sendgrid/mail": "^7.6.2",
+    "bcrypt": "^5.0.1",
+    "cloudinary": "^1.28.1",
+    "express": "^4.17.3",
+    "express-validator": "^6.14.0",
+    "jsonwebtoken": "^8.5.1",
+    "libphonenumber-js": "^1.9.49",
+    "moment": "^2.29.1",
+    "mongoose": "^6.2.6",
+    "multer": "^1.4.4",
+    "twilio": "^3.75.1",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/express": "^4.17.13",
+    "@types/jsonwebtoken": "^8.5.8",
+    "@types/multer": "^1.4.7",
+    "@types/uuid": "^8.3.4",
+    "nodemon": "^2.0.15",
+    "typescript": "^4.6.2"
+  }
+}
