@@ -37,8 +37,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(multer({ storage: handleStorage }).array(KEY_MULTER));
 app.use(useCors);
 app.use("/api/file", fileRouter);
-app.use('/api/auth', authRouter);
-app.use('/api/products', productRouter);
+app.use("/api/auth", authRouter);
+app.use("/api/products", productRouter);
 
 app.use(handleError);
 mongoose
@@ -48,3 +48,5 @@ mongoose
   .then((result) => {
     app.listen(9000);
   });
+
+  

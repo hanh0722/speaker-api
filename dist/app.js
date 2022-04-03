@@ -37,8 +37,8 @@ app.use(express_1.default.urlencoded({ extended: false }));
 app.use((0, multer_1.default)({ storage: handleStorage }).array(key_1.KEY_MULTER));
 app.use(cors_1.useCors);
 app.use("/api/file", routes_1.fileRouter);
-app.use('/api/auth', routes_1.authRouter);
-app.use('/api/products', routes_1.productRouter);
+app.use("/api/auth", routes_1.authRouter);
+app.use("/api/products", routes_1.productRouter);
 app.use(error_1.handleError);
 mongoose_1.default
     .connect(`mongodb+srv://${process.env["MONGODB_USERNAME"]}:${process.env["MONGODB_PASSWORD"]}@cluster0.bhp9h.mongodb.net/speaker-api?retryWrites=true&w=majority`)
