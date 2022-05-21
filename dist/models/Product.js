@@ -35,6 +35,10 @@ const ProductSchema = new Schema({
     },
     discount_price: {
         type: Number
+    },
+    collections: {
+        type: Schema.Types.ObjectId,
+        ref: 'collection',
     }
 }, {
     timestamps: true

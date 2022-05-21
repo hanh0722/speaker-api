@@ -127,7 +127,10 @@ export const loginController: RequestHandler = async (req, res, next) => {
       message: "Username or password is not correct",
       code: 422,
     };
-    const user = await User.findOne({ username: username });
+    const user = await User.findOne({ username: username }).populate([
+      'compare_list',
+      'address'
+    ]);
     if (!user) {
       return res.status(422).json(response);
     }
@@ -177,7 +180,10 @@ export const loginByTokenController: RequestHandler = async (
         user: string;
         exp: number;
       };
-      const user = await User.findById(parsedToken.id);
+      const user = await User.findById(parsedToken.id).populate([
+        'compare_list',
+        'address'
+      ]);
       if (user) {
         req.userId = user._id;
         req.username = user.username;

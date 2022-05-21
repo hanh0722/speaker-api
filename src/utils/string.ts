@@ -1,6 +1,8 @@
 import crypto from "crypto";
+import getSlug from 'speakingurl';
 import parsePhoneNumber, { CountryCode } from "libphonenumber-js";
 import { REGEX_PHONE } from "../constants/string";
+import { v4 } from "uuid";
 export const randomNumber = (cb: (value: string | null) => void) => {
   return crypto.randomBytes(16, (err, buffer) => {
     if (err) {
@@ -38,3 +40,18 @@ export const getToken = (header?: string) => {
     return null;
   }
 };
+
+export const isUrl = (url: string) => {
+  try {
+    const urlParsed = new URL(url);
+    return !!urlParsed.pathname;
+  } catch (err) {
+    return false;
+  }
+};
+
+export const generateSlug = (url: string) => {
+  
+    const randomString = v4()
+    return `${getSlug(url)}-${randomString}`;
+}

@@ -5,12 +5,23 @@ import cloudinary from "cloudinary";
 import path from "path";
 import { KEY_MULTER } from "./constants/key";
 import { useCors } from "./controller/cors";
-import { authRouter, fileRouter, productRouter } from "./routes";
+import {
+  authRouter,
+  fileRouter,
+  productRouter,
+  collectionRouter,
+  cartRouter,
+  countryRouter,
+  addressRouter,
+  checkoutRouter,
+  paymentRouter,
+  blogRouter,
+} from "./routes";
 import { root } from "./utils/root";
 import { randomNumber } from "./utils/string";
 import { handleError } from "./controller/error";
-
-const app = express();
+import app from "./config/server";
+import { init } from "./config/socket";
 
 const handleStorage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -39,6 +50,13 @@ app.use(useCors);
 app.use("/api/file", fileRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/products", productRouter);
+app.use("/api/collections", collectionRouter);
+app.use("/api/cart", cartRouter);
+app.use("/api/country", countryRouter);
+app.use("/api/address", addressRouter);
+app.use("/api/checkout", checkoutRouter);
+app.use("/api/payment", paymentRouter);
+app.use("/api/blog", blogRouter);
 
 app.use(handleError);
 mongoose
@@ -46,7 +64,6 @@ mongoose
     `mongodb+srv://${process.env["MONGODB_USERNAME"]}:${process.env["MONGODB_PASSWORD"]}@cluster0.bhp9h.mongodb.net/speaker-api?retryWrites=true&w=majority`
   )
   .then((result) => {
-    app.listen(9000);
+    const server = app.listen(9000);
+    init(server);
   });
-
-  

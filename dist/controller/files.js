@@ -14,21 +14,29 @@ const files_1 = require("../utils/files");
 const uploadImage = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const files = req.files;
-        const uploadFilePromise = files.map(item => {
+        const uploadFilePromise = files.map((item) => {
             return (0, files_1.uploadMultipleFile)(item.path);
         });
-        const response = yield Promise.all(uploadFilePromise);
-        const getURLs = response.map((item) => {
-            return item.secure_url;
-        });
-        res.json({
-            message: 'successfully',
-            code: 200,
-            urls: getURLs
-        });
+        try {
+            const response = yield Promise.all(uploadFilePromise);
+            const getURLs = response.map((item) => {
+                return item.secure_url;
+            });
+            res.json({
+                message: "successfully",
+                code: 200,
+                urls: getURLs,
+            });
+        }
+        catch (err) {
+            throw new Error(err);
+        }
     }
     catch (err) {
-        console.log(err);
+        res.status(401).json({
+            message: 'cannot upload file',
+            code: 401
+        });
     }
 });
 exports.uploadImage = uploadImage;

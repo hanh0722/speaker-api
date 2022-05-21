@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const blog_1 = require("../controller/blog");
+const auth_1 = require("../middleware/auth");
+const validate_user_1 = require("../middleware/validate-user");
+const blog_2 = require("../validation/blog");
+const router = (0, express_1.Router)();
+router.post("/create", blog_2.validateCreateBlog, auth_1.authMiddleware, validate_user_1.validateUserByRole, blog_1.createBlogController);
+router.get('/suggest/tags', blog_1.getTagController);
+router.get('/get', blog_1.getBlogController);
+router.get('/get/:id', blog_1.getBlogByIdController);
+exports.default = router;

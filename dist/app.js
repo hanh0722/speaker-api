@@ -14,7 +14,8 @@ const routes_1 = require("./routes");
 const root_1 = require("./utils/root");
 const string_1 = require("./utils/string");
 const error_1 = require("./controller/error");
-const app = (0, express_1.default)();
+const server_1 = __importDefault(require("./config/server"));
+const socket_1 = require("./config/socket");
 const handleStorage = multer_1.default.diskStorage({
     destination: (req, file, cb) => {
         cb(null, path_1.default.join(__dirname, "upload"));
@@ -31,17 +32,25 @@ cloudinary_1.default.v2.config({
     api_secret: process.env["CLOUDINARY_KEY_SECRET"],
     secure: true,
 });
-app.use(express_1.default.json());
-app.use(express_1.default.static(path_1.default.join(root_1.root, "static")));
-app.use(express_1.default.urlencoded({ extended: false }));
-app.use((0, multer_1.default)({ storage: handleStorage }).array(key_1.KEY_MULTER));
-app.use(cors_1.useCors);
-app.use("/api/file", routes_1.fileRouter);
-app.use("/api/auth", routes_1.authRouter);
-app.use("/api/products", routes_1.productRouter);
-app.use(error_1.handleError);
+server_1.default.use(express_1.default.json());
+server_1.default.use(express_1.default.static(path_1.default.join(root_1.root, "static")));
+server_1.default.use(express_1.default.urlencoded({ extended: false }));
+server_1.default.use((0, multer_1.default)({ storage: handleStorage }).array(key_1.KEY_MULTER));
+server_1.default.use(cors_1.useCors);
+server_1.default.use("/api/file", routes_1.fileRouter);
+server_1.default.use("/api/auth", routes_1.authRouter);
+server_1.default.use("/api/products", routes_1.productRouter);
+server_1.default.use("/api/collections", routes_1.collectionRouter);
+server_1.default.use("/api/cart", routes_1.cartRouter);
+server_1.default.use("/api/country", routes_1.countryRouter);
+server_1.default.use("/api/address", routes_1.addressRouter);
+server_1.default.use("/api/checkout", routes_1.checkoutRouter);
+server_1.default.use("/api/payment", routes_1.paymentRouter);
+server_1.default.use("/api/blog", routes_1.blogRouter);
+server_1.default.use(error_1.handleError);
 mongoose_1.default
     .connect(`mongodb+srv://${process.env["MONGODB_USERNAME"]}:${process.env["MONGODB_PASSWORD"]}@cluster0.bhp9h.mongodb.net/speaker-api?retryWrites=true&w=majority`)
     .then((result) => {
-    app.listen(9000);
+    const server = server_1.default.listen(9000);
+    (0, socket_1.init)(server);
 });

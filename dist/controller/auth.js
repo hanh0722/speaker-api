@@ -132,7 +132,10 @@ const loginController = (req, res, next) => __awaiter(void 0, void 0, void 0, fu
             message: "Username or password is not correct",
             code: 422,
         };
-        const user = yield User_1.default.findOne({ username: username });
+        const user = yield User_1.default.findOne({ username: username }).populate([
+            'compare_list',
+            'address'
+        ]);
         if (!user) {
             return res.status(422).json(response);
         }
@@ -171,7 +174,10 @@ const loginByTokenController = (req, res, next) => __awaiter(void 0, void 0, voi
         const token = (0, string_1.getToken)(header);
         if (token) {
             const parsedToken = jsonwebtoken_1.default.decode(token);
-            const user = yield User_1.default.findById(parsedToken.id);
+            const user = yield User_1.default.findById(parsedToken.id).populate([
+                'compare_list',
+                'address'
+            ]);
             if (user) {
                 req.userId = user._id;
                 req.username = user.username;

@@ -8,17 +8,26 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.uploadMultipleFile = void 0;
+exports.uploadMultipleFile = exports.removeFileWithPath = void 0;
 const cloudinary_1 = require("cloudinary");
+const fs_1 = __importDefault(require("fs"));
+const removeFileWithPath = (path, callback) => {
+    return fs_1.default.unlink(path, (err) => callback(err));
+};
+exports.removeFileWithPath = removeFileWithPath;
 const uploadMultipleFile = (path) => __awaiter(void 0, void 0, void 0, function* () {
     return new Promise((resolve, reject) => {
         cloudinary_1.v2.uploader.upload(path, (err, response) => {
-            if (err) {
-                reject('Cannot upload file');
-            }
-            ;
-            resolve(response);
+            (0, exports.removeFileWithPath)(path, (error) => {
+                if (error || err) {
+                    reject("Cannot upload file");
+                }
+                resolve(response);
+            });
         });
     });
 });

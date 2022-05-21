@@ -9,6 +9,7 @@
         "TWILIO_SID": "ACd1edbd7e82d4600c389fad31ec346e74",
         "TWILIO_AUTH_TOKEN": "3a23908fcdc4f0de30c0d86e8c12ae1b",
         "ADMIN_EMAIL": "AnhNDH.B19CN022@stu.ptit.edu.vn",
-        "TWILIO_NUMBER": "+19046011556"
+        "TWILIO_NUMBER": "+19046011556",
+        "STRIPE_KEY": "sk_test_51Kuq9XDJ4bPJBA62qDKEVMsdh6ZBmPs9h2N3OyuD1Pg0yJ1D3XZVLrGagSBmI7XnVTXqIvhSerV2Xi3AxqnaDZP200mKdADXnW"
     }
 }

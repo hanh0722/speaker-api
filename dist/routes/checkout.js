@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const checkout_1 = require("../controller/checkout");
+const auth_1 = require("../middleware/auth");
+const order_1 = require("../validation/order");
+const router = (0, express_1.Router)();
+router.post('/create', order_1.validationOrder, auth_1.authMiddleware, checkout_1.onCheckoutController);
+router.delete('/delete/:redirect_id', order_1.validationDeleteOrder, auth_1.authMiddleware, checkout_1.onDeleteOrderErrorController);
+exports.default = router;
