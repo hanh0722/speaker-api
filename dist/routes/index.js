@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.blogRouter = exports.paymentRouter = exports.checkoutRouter = exports.addressRouter = exports.countryRouter = exports.cartRouter = exports.collectionRouter = exports.productRouter = exports.authRouter = exports.fileRouter = void 0;
+exports.userRouter = exports.chatRouter = exports.blogRouter = exports.paymentRouter = exports.checkoutRouter = exports.addressRouter = exports.countryRouter = exports.cartRouter = exports.collectionRouter = exports.productRouter = exports.authRouter = exports.fileRouter = void 0;
 const files_1 = __importDefault(require("./files"));
 exports.fileRouter = files_1.default;
 const auth_1 = __importDefault(require("./auth"));
@@ -24,3 +24,7 @@ const payment_1 = __importDefault(require("./payment"));
 exports.paymentRouter = payment_1.default;
 const blog_1 = __importDefault(require("./blog"));
 exports.blogRouter = blog_1.default;
+const chat_1 = __importDefault(require("./chat"));
+exports.chatRouter = chat_1.default;
+const user_1 = __importDefault(require("./user"));
+exports.userRouter = user_1.default;

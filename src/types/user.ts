@@ -1,4 +1,5 @@
 import { Document, Model, Types } from "mongoose";
+import { SortBaseRequest } from "./base";
 import { ProductHandler } from "./product";
 export interface UserRequest {
   username: string;
@@ -55,4 +56,8 @@ export interface UserDocument extends UserHandler, Document {
 
 export interface UserModelProps extends Model<UserDocument>, UserRequest {
 
+}
+
+export interface SearchUserQuery extends SortBaseRequest {
+  s?: string
 }

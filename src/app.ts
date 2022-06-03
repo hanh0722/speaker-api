@@ -16,12 +16,18 @@ import {
   checkoutRouter,
   paymentRouter,
   blogRouter,
+  chatRouter,
+  userRouter,
 } from "./routes";
 import { root } from "./utils/root";
 import { randomNumber } from "./utils/string";
 import { handleError } from "./controller/error";
 import app from "./config/server";
-import { init } from "./config/socket";
+import { getSocket, init } from "./config/socket";
+import { useSocketMiddleWare } from "./middleware/socket";
+
+const server = app.listen(9000);
+init(server);
 
 const handleStorage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -34,19 +40,26 @@ const handleStorage = multer.diskStorage({
   },
 });
 
-cloudinary.v2.config({
-  cloud_name: process.env["CLOUD_NAME"],
-  api_key: process.env["CLOUDINARY_KEY"],
-  api_secret: process.env["CLOUDINARY_KEY_SECRET"],
-  secure: true,
-});
+(function () {
+  cloudinary.v2.config({
+    cloud_name: process.env["CLOUD_NAME"],
+    api_key: process.env["CLOUDINARY_KEY"],
+    api_secret: process.env["CLOUDINARY_KEY_SECRET"],
+    secure: true,
+  });
+})();
 
 app.use(express.json());
 app.use(express.static(path.join(root, "static")));
 app.use(express.urlencoded({ extended: false }));
 
 app.use(multer({ storage: handleStorage }).array(KEY_MULTER));
+
 app.use(useCors);
+
+useSocketMiddleWare();
+
+getSocket().on("connection", (socket) => {});
 app.use("/api/file", fileRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/products", productRouter);
@@ -57,13 +70,12 @@ app.use("/api/address", addressRouter);
 app.use("/api/checkout", checkoutRouter);
 app.use("/api/payment", paymentRouter);
 app.use("/api/blog", blogRouter);
+app.use("/api/chat", chatRouter);
+app.use("/api/user", userRouter);
 
 app.use(handleError);
 mongoose
   .connect(
     `mongodb+srv://${process.env["MONGODB_USERNAME"]}:${process.env["MONGODB_PASSWORD"]}@cluster0.bhp9h.mongodb.net/speaker-api?retryWrites=true&w=majority`
   )
-  .then((result) => {
-    const server = app.listen(9000);
-    init(server);
-  });
+  .then((result) => {});

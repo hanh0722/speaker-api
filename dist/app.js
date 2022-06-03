@@ -16,6 +16,9 @@ const string_1 = require("./utils/string");
 const error_1 = require("./controller/error");
 const server_1 = __importDefault(require("./config/server"));
 const socket_1 = require("./config/socket");
+const socket_2 = require("./middleware/socket");
+const server = server_1.default.listen(9000);
+(0, socket_1.init)(server);
 const handleStorage = multer_1.default.diskStorage({
     destination: (req, file, cb) => {
         cb(null, path_1.default.join(__dirname, "upload"));
@@ -37,6 +40,9 @@ server_1.default.use(express_1.default.static(path_1.default.join(root_1.root, "
 server_1.default.use(express_1.default.urlencoded({ extended: false }));
 server_1.default.use((0, multer_1.default)({ storage: handleStorage }).array(key_1.KEY_MULTER));
 server_1.default.use(cors_1.useCors);
+(0, socket_2.useSocketMiddleWare)();
+(0, socket_1.getSocket)().on('connection', socket => {
+});
 server_1.default.use("/api/file", routes_1.fileRouter);
 server_1.default.use("/api/auth", routes_1.authRouter);
 server_1.default.use("/api/products", routes_1.productRouter);
@@ -47,10 +53,9 @@ server_1.default.use("/api/address", routes_1.addressRouter);
 server_1.default.use("/api/checkout", routes_1.checkoutRouter);
 server_1.default.use("/api/payment", routes_1.paymentRouter);
 server_1.default.use("/api/blog", routes_1.blogRouter);
+server_1.default.use('/api/chat', routes_1.chatRouter);
+server_1.default.use('/api/user', routes_1.userRouter);
 server_1.default.use(error_1.handleError);
 mongoose_1.default
     .connect(`mongodb+srv://${process.env["MONGODB_USERNAME"]}:${process.env["MONGODB_PASSWORD"]}@cluster0.bhp9h.mongodb.net/speaker-api?retryWrites=true&w=majority`)
-    .then((result) => {
-    const server = server_1.default.listen(9000);
-    (0, socket_1.init)(server);
-});
+    .then((result) => { });

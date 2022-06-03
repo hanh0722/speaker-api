@@ -8,6 +8,8 @@ import addressRouter from "./address";
 import checkoutRouter from './checkout';
 import paymentRouter from './payment';
 import blogRouter from './blog';
+import chatRouter from './chat';
+import userRouter from './user';
 export {
   fileRouter,
   authRouter,
@@ -18,5 +20,7 @@ export {
   addressRouter,
   checkoutRouter,
   paymentRouter,
-  blogRouter
+  blogRouter,
+  chatRouter,
+  userRouter
 };
