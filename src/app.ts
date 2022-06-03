@@ -26,7 +26,9 @@ import app from "./config/server";
 import { getSocket, init } from "./config/socket";
 import { useSocketMiddleWare } from "./middleware/socket";
 
-const server = app.listen(9000);
+const server = app.listen(process.env.PORT || 9000, () => {
+  console.log(`Server is running at port ${process.env.PORT || 9000}`);
+});
 init(server);
 
 const handleStorage = multer.diskStorage({
