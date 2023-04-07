@@ -20,6 +20,7 @@ export const chatController: RequestHandler = (req, res, next) => {
       target_id: receiver,
 
     })
+    console.log(io);
     io.to(room).emit("get-message", {
       message: message,
       room: room,

@@ -29,7 +29,11 @@ import { useSocketMiddleWare } from "./middleware/socket";
 const server = app.listen(process.env.PORT || 9000, () => {
   console.log(`Server is running at port ${process.env.PORT || 9000}`);
 });
-init(server);
+const io = init(server);
+
+io.on('connection', socket => {
+  console.log(socket.id);
+})
 
 const handleStorage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -80,4 +84,5 @@ mongoose
   .connect(
     `mongodb+srv://${process.env["MONGODB_USERNAME"]}:${process.env["MONGODB_PASSWORD"]}@cluster0.bhp9h.mongodb.net/speaker-api?retryWrites=true&w=majority`
   )
-  .then((result) => {});
+  .then((result) => {
+  });

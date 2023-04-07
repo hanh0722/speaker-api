@@ -105,6 +105,20 @@ const UserSchema = new mongoose_1.Schema({
     ],
     avatar_url: {
         type: String
+    },
+    info_details: {
+        role: {
+            type: String
+        },
+        zip_code: {
+            type: String
+        },
+        country: {
+            type: String
+        },
+        company: {
+            type: String
+        }
     }
 }, { timestamps: true });
 UserSchema.methods.addToCartUser = function (productId, quantity) {

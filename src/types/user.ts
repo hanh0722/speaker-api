@@ -22,6 +22,13 @@ export interface CartPropsPopulate {
   productId: ProductHandler,
   quantity: number
 }
+
+export interface UserInfoDetail {
+  country?: string;
+  zip_code?: string;
+  company?: string;
+  role?: string;
+}
 export interface UserHandler extends Document {
   username: string;
   name: string;
@@ -41,6 +48,7 @@ export interface UserHandler extends Document {
   cart: Array<CartProps>;
   address: Array<Types.ObjectId>;
   orders: Array<Types.ObjectId>;
+  info_details: UserInfoDetail,
   _doc: UserHandler;
 };
 
@@ -60,4 +68,13 @@ export interface UserModelProps extends Model<UserDocument>, UserRequest {
 
 export interface SearchUserQuery extends SortBaseRequest {
   s?: string
+}
+
+export interface PostUpdateUser {
+  full_name: string;
+  info: string;
+  country: string;
+  company: string;
+  role: string;
+  avatar_url: string;
 }

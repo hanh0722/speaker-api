@@ -1,3 +1,40 @@
+BE API
+
+To run the project, install 4 steps:
+
+Step 1: Install NodeJS with the url:
+
+[https://nodejs.org/en]
+
+NOTE: use nodejs version lower 18
+
+To switch easily, you can use NVM packages
+
+[https://github.com/nvm-sh/nvm]
+
+Step 2: Install packages with command using npm
+
+```bash
+npm install
+```
+
+Step 3: Add environment variables file
+
+Create a file in the root folder, check the current directory with command
+
+```bash
+pwd
+```
+
+Then create a file with the name
+
+```bash
+nodemon.json
+```
+
+Add info to nodemon.json file:
+
+```bash
 {
     "env": {
         "CLOUDINARY_KEY": "539275864181413",
@@ -13,3 +50,12 @@
         "STRIPE_KEY": "sk_test_51Kuq9XDJ4bPJBA62qDKEVMsdh6ZBmPs9h2N3OyuD1Pg0yJ1D3XZVLrGagSBmI7XnVTXqIvhSerV2Xi3AxqnaDZP200mKdADXnW"
     }
 }
+```
+
+Step 4: Run the project with command
+
+```bash
+npm run dev
+```
+
+Server in local in port 9000

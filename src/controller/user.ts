@@ -1,7 +1,8 @@
 import { RequestHandler } from "express";
+import { validationResult } from "express-validator";
 import { PAGE_DEFAULT, PAGE_SIZE } from "../constants/string";
 import User from "../models/User";
-import { SearchUserQuery } from "../types/user";
+import { PostUpdateUser, SearchUserQuery } from "../types/user";
 import { generateRegexFindObject, generateSortObject } from "../utils/query";
 import { getUserResponse } from "../utils/response";
 
@@ -43,3 +44,14 @@ export const searchUserController: RequestHandler = async (req, res, next) => {
     next(err);
   }
 };
+
+export const updateInfoUserController: RequestHandler = (req, res, next) => {
+  const { company, country, avatar_url,  } = req.body as PostUpdateUser;
+
+  try{
+    const isValidInfo = validationResult(req);
+
+  }catch(err) {
+    next(err);
+  }
+}

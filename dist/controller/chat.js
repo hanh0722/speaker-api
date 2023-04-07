@@ -23,6 +23,7 @@ const chatController = (req, res, next) => {
             sender_id: req.userId,
             target_id: receiver,
         });
+        console.log(io);
         io.to(room).emit("get-message", {
             message: message,
             room: room,

@@ -12,7 +12,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.searchUserController = void 0;
+exports.updateInfoUserController = exports.searchUserController = void 0;
+const express_validator_1 = require("express-validator");
 const string_1 = require("../constants/string");
 const User_1 = __importDefault(require("../models/User"));
 const query_1 = require("../utils/query");
@@ -42,3 +43,13 @@ const searchUserController = (req, res, next) => __awaiter(void 0, void 0, void 
     }
 });
 exports.searchUserController = searchUserController;
+const updateInfoUserController = (req, res, next) => {
+    const { company, country, avatar_url, } = req.body;
+    try {
+        const isValidInfo = (0, express_validator_1.validationResult)(req);
+    }
+    catch (err) {
+        next(err);
+    }
+};
+exports.updateInfoUserController = updateInfoUserController;
